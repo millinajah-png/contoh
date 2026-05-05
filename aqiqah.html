@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ummi Aqiqah - Katalog & Pemesanan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFF9F0;
+            color: #2C2C2C;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* Header Premium - Dominasi Oren & Emas */
+        .hero {
+            background: linear-gradient(135deg, #E67E22 0%, #D35400 50%, #F39C12 100%);
+            border-radius: 32px;
+            padding: 48px 32px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -10px rgb(226, 136, 57);
+        }
+
+        .hero::before {
+            content: "🐑✨";
+            font-size: 200px;
+            opacity: 0.08;
+            position: absolute;
+            right: -20px;
+            bottom: -50px;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFF5E0, #FFE0B5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-top: 12px;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,215,0,0.5);
+        }
+
+        .badge i {
+            margin-right: 6px;
+            color: #FFD700;
+        }
+
+        /* Filter card - Putih dengan aksen emas */
+        .filter-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #FDEBD0;
+            border-top: 4px solid #D4AF37;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #E67E22;
+            font-size: 1rem;
+        }
+
+        .city-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .city-btn {
+            background: #FEF5E7;
+            border: 1px solid #FDEBD0;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            color: #5D4037;
+        }
+
+        .city-btn.active {
+            background: #E67E22;
+            color: white;
+            border-color: #E67E22;
+            box-shadow: 0 4px 12px rgba(230,126,34,0.3);
+        }
+
+        /* Kalkulator */
+        .calculator {
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            margin-bottom: 48px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+            border: 1px solid #FDEBD0;
+            border-bottom: 4px solid #D4AF37;
+        }
+
+        .calc-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .calc-header i {
+            font-size: 32px;
+            color: #F39C12;
+        }
+
+        .calc-header h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #E67E22;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            color: #E67E22;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            border: 1.5px solid #FDEBD0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            background: #FFFCF8;
+            transition: 0.2s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #F39C12;
+        }
+
+        .price-result {
+            background: linear-gradient(135deg, #FFF8F0, #FFF3E4);
+            padding: 20px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #FDEBD0;
+        }
+
+        .price-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #E67E22;
+        }
+
+        .btn-wa-large {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+        }
+
+        .btn-wa-large:hover {
+            background: #1da85c;
+            transform: scale(1.01);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 48px 0 28px;
+            color: #E67E22;
+            border-left: 6px solid #D4AF37;
+            padding-left: 20px;
+        }
+
+        /* Card Paket - Putih dengan aksen emas/oren */
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+            border: 1px solid #FDEBD0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 36px -12px rgba(230,126,34,0.2);
+            border-color: #F4A261;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #E67E22, #F39C12);
+            padding: 24px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .card-header i {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2.2rem;
+            opacity: 0.25;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .price-range {
+            background: #FFF8F0;
+            padding: 14px;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 18px;
+            border: 1px solid #FDEBD0;
+        }
+
+        .price-main {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #E67E22;
+        }
+
+        .price-sub {
+            font-size: 0.7rem;
+            color: #B8860B;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .menu-list li {
+            font-size: 0.8rem;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #FEF0E0;
+        }
+
+        .menu-list li i {
+            color: #D4AF37;
+            width: 20px;
+            font-size: 0.8rem;
+        }
+
+        .btn-wa-small {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-wa-small:hover {
+            background: #128C7E;
+        }
+
+        /* Footer Premium */
+        footer {
+            margin-top: 60px;
+            background: linear-gradient(135deg, #2C2C2C, #1A1A1A);
+            color: #FFE0B5;
+            padding: 36px 28px;
+            border-radius: 32px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 3px solid #D4AF37;
+        }
+
+        footer i {
+            color: #F4A261;
+            margin-right: 6px;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .price-value { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>✨ Ummi Aqiqah</h1>
+        <p>Katalog & Pemesanan • Terpercaya Sejak 2015</p>
+        <div class="badge-container">
+            <span class="badge"><i class="fas fa-certificate"></i> Halal MUI</span>
+            <span class="badge"><i class="fas fa-award"></i> ASPAQIN</span>
+            <span class="badge"><i class="fas fa-user-check"></i> Sertifikasi BNSP</span>
+        </div>
+    </div>
+
+    <div class="filter-card">
+        <div class="filter-title"><i class="fas fa-map-marker-alt"></i> Pilih Wilayah Pengiriman</div>
+        <div class="city-buttons" id="cityButtons">
+            <button data-city="Jakarta" class="city-btn">Jakarta</button>
+            <button data-city="Depok" class="city-btn active">Depok</button>
+            <button data-city="Bogor" class="city-btn">Bogor</button>
+            <button data-city="Tangerang" class="city-btn">Tangerang</button>
+            <button data-city="Bekasi" class="city-btn">Bekasi</button>
+            <button data-city="Surabaya" class="city-btn">Surabaya</button>
+            <button data-city="Sidoarjo" class="city-btn">Sidoarjo</button>
+        </div>
+    </div>
+
+    <div class="calculator">
+        <div class="calc-header">
+            <i class="fas fa-calculator"></i>
+            <h3>Kalkulator Aqiqah</h3>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-baby"></i> Jenis Kelamin Anak</label>
+                <select id="gender">
+                    <option value="laki">👦 Laki-laki (2 kambing)</option>
+                    <option value="perempuan">👧 Perempuan (1 kambing)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-box"></i> Pilih Paket</label>
+                <select id="packageType">
+                    <option value="ekonomis">Paket Ekonomis</option>
+                    <option value="reguler">Paket Reguler</option>
+                    <option value="kebuli">Paket Kebuli</option>
+                    <option value="masakan">Paket Masakan Saja</option>
+                    <option value="hewan_only">Hewan + Potong Syar'i</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> Perkiraan Tamu</label>
+                <input type="number" id="guests" value="50" step="10">
+            </div>
+        </div>
+        <div class="price-result" id="estimateResult">
+            <div class="price-value">Rp --</div>
+            <div style="font-size: 13px;">✨ estimasi total + ongkir ke wilayah terpilih</div>
+        </div>
+        <button class="btn-wa-large" id="calcAndOrderBtn"><i class="fab fa-whatsapp"></i> Pesan Sekarang via WhatsApp</button>
+    </div>
+
+    <div class="section-title">🌸 Pilihan Paket Aqiqah</div>
+    <div class="packages" id="packagesContainer"></div>
+
+    <footer>
+        <p><i class="fas fa-store"></i> Datang & Saksikan Langsung Pemotongan Hewan Aqiqah di Kandang Kami</p>
+        <p><i class="fab fa-whatsapp"></i> 0813 3256 5541 &nbsp;|&nbsp; 0813 5760 0951</p>
+        <p><i class="fas fa-map-pin"></i> Green Leaf Village Blok A No.7, Bedahan, Sawangan, Depok</p>
+        <p style="margin-top: 16px;">⭐ 10.000+ Keluarga Percaya | ⭐ Rating 5.0 di Google</p>
+        <p>✨ Ummi Aqiqah — Berkah, Halal, Nikmat ✨</p>
+    </footer>
+</div>
+
+<script>
+    const packages = [
+        { name: "Paket Ekonomis", desc: "Nasi Putih + 2 Olahan Utama + Acar Segar + Kerupuk Premium + Sendok + Tisu + Sabuk Bento", priceMin: 1300000, priceMax: 1800000, type: "ekonomis", icon: "fa-coins" },
+        { name: "Paket Reguler", desc: "Nasi Putih + 2 Olahan Utama + Acar Segar + Kerupuk Udang Premium + Air Mineral + Kartu Ucapan + Sendok + Tisu", priceMin: 1700000, priceMax: 2300000, type: "reguler", icon: "fa-utensils" },
+        { name: "Paket Kebuli", desc: "Nasi Kebuli + Daging Goreng/Krengsengan + Gulai/Tongseng + Jeruk + Acar Nanas Segar + Kerupuk Udang Premium + Air Mineral + Kartu Ucapan", priceMin: 2100000, priceMax: 2900000, type: "kebuli", icon: "fa-mosque" },
+        { name: "Paket Masakan Saja", desc: "2 Olahan Menu Utama (Kemas Besar atau Per Porsi) + Acar Segar", priceMin: 900000, priceMax: 1400000, type: "masakan", icon: "fa-drumstick-bite" },
+        { name: "Hanya Hewan + Potong Syar'i", desc: "Kambing/Domba sehat, dipotong bersih sesuai syariat, siap olah sendiri", priceMin: 1000000, priceMax: 1300000, type: "hewan_only", icon: "fa-paw" }
+    ];
+
+    let selectedCity = "Depok";
+
+    document.querySelectorAll('.city-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            selectedCity = this.getAttribute('data-city');
+            renderPackages();
+            updateEstimate();
+        });
+    });
+
+    function getOngkir(city) {
+        const map = { Jakarta:75000, Depok:35000, Bogor:65000, Tangerang:80000, Bekasi:70000, Surabaya:120000, Sidoarjo:115000 };
+        return map[city] || 50000;
+    }
+
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID').format(angka);
+    }
+
+    function renderPackages() {
+        const container = document.getElementById('packagesContainer');
+        if(!container) return;
+        container.innerHTML = '';
+        packages.forEach(pkg => {
+            const ongkir = getOngkir(selectedCity);
+            const minTot = pkg.priceMin + ongkir;
+            const maxTot = pkg.priceMax + ongkir;
+            const descItems = pkg.desc.split('+').map(s => s.trim());
+            container.innerHTML += `
+                <div class="card">
+                    <div class="card-header">
+                        <h3>${pkg.name}</h3>
+                        <i class="fas ${pkg.icon}"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="price-range">
+                            <span class="price-main">Rp ${formatRupiah(pkg.priceMin)} - ${formatRupiah(pkg.priceMax)}</span>
+                            <div class="price-sub">+ ongkir ${formatRupiah(ongkir)} → Total Rp ${formatRupiah(minTot)} - ${formatRupiah(maxTot)}</div>
+                        </div>
+                        <ul class="menu-list">
+                            ${descItems.map(item => `<li><i class="fas fa-check-circle"></i> ${item}</li>`).join('')}
+                        </ul>
+                        <a href="#" class="btn-wa-small" data-paket="${pkg.name}" data-type="${pkg.type}"><i class="fab fa-whatsapp"></i> Pesan via WhatsApp</a>
+                    </div>
+                </div>
+            `;
+        });
+        document.querySelectorAll('.btn-wa-small').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const paketName = btn.getAttribute('data-paket');
+                const paketType = btn.getAttribute('data-type');
+                orderViaWA(paketName, paketType);
+            });
+        });
+    }
+
+    function getGenderText(genderVal) {
+        return genderVal === 'laki' ? 'Laki-laki (2 kambing)' : 'Perempuan (1 kambing)';
+    }
+
+    function updateEstimate() {
+        const gender = document.getElementById('gender').value;
+        const packageType = document.getElementById('packageType').value;
+        let guests = parseInt(document.getElementById('guests').value, 10);
+        if(isNaN(guests) || guests < 10) guests = 50;
+        const pkgData = packages.find(p => p.type === packageType);
+        if(!pkgData) return;
+        let factor = Math.max(0.8, Math.min(1.6, guests / 50));
+        let minEst = Math.floor(pkgData.priceMin * factor);
+        let maxEst = Math.floor(pkgData.priceMax * factor);
+        const totalMin = minEst + getOngkir(selectedCity);
+        const totalMax = maxEst + getOngkir(selectedCity);
+        document.getElementById('estimateResult').innerHTML = `<div class="price-value">Rp ${formatRupiah(totalMin)} - ${formatRupiah(totalMax)}</div><div style="font-size:13px;">✨ estimasi untuk ${selectedCity} (termasuk ongkir)</div>`;
+    }
+
+    function orderViaWA(paketName, paketType) {
+        const gender = document.getElementById('gender').value;
+        let guests = parseInt(document.getElementById('guests').value, 10);
+        if(isNaN(guests) || guests < 10) guests = 50;
+        const genderText = getGenderText(gender);
+        let message = `Halo Ummi Aqiqah,%0A%0ASaya ingin pesan aqiqah:%0A📦 Paket: ${paketName}%0A👶 ${genderText}%0A🍽️ ± ${guests} tamu%0A📍 ${selectedCity}%0A%0AMohon info ketersediaan & total biaya. Terima kasih.`;
+        window.open(`https://wa.me/6281332565541?text=${message}`, '_blank');
+    }
+
+    document.getElementById('calcAndOrderBtn')?.addEventListener('click', () => {
+        const packageType = document.getElementById('packageType').value;
+        const pkgData = packages.find(p => p.type === packageType);
+        if(pkgData) orderViaWA(pkgData.name, packageType);
+        else alert("Silakan pilih paket terlebih dahulu");
+    });
+
+    document.getElementById('gender')?.addEventListener('change', updateEstimate);
+    document.getElementById('packageType')?.addEventListener('change', updateEstimate);
+    document.getElementById('guests')?.addEventListener('input', updateEstimate);
+    renderPackages();
+    updateEstimate();
+</script>
+</body>
+</html>
